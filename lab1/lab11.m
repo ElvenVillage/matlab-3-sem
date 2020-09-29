@@ -33,7 +33,7 @@ plot(plot_b_y, '-bo')
 % Решение уравнения f_a(x) = 0 методом простых итераций
 plot_a_y2 = zeros(9,1);
 for i = 1:9
-    [ax, ak] = fixed_point(0.5, g_a, eps(i));
+    [ax, ak] = fixed_point(0, g_a, eps(i), 0.15);
     plot_a_y2(i) = ak;
 end
 ya2 = ax
@@ -42,7 +42,7 @@ plot(plot_a_y2, '-go')
 % Решение уравнения f_b(x) = 0 методом простых итераций
 plot_b_y2 = zeros(9,1);
 for i = 1:9
-    [bx, bk] = fixed_point(0.5, g_b, eps(i));
+    [bx, bk] = fixed_point(0.5, g_b, eps(i), 0.95);
     plot_b_y2(i) = bk;
 end
 yb2 = bx

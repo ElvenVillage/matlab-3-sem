@@ -17,7 +17,7 @@ figure;
 plot_a_x = linspace(0.1, 0.7, 500);
 plot_a_y_2 = zeros(500, 1);
 for i = 1:500
-    [ax, ak] = fixed_point(plot_a_x(i), g_a, eps(8), 0.15);
+    [ax, ak] = fixed_point(plot_a_x(i), g_a, eps(8), 0.06);
     plot_a_y_2(i) = ak;
 end
 ya2 = ax

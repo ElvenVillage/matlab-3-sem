@@ -3,14 +3,17 @@ function S = matrix_with_det(n,d)
     s = ones(1,n);
     r = randi(n,1,1);
     s(r) = d;
+%     s = ones(1, n) .* d^(1/n);
     
-%     for i = 1:fix(log(d))
-%         if i ~= r
-%             s(r) = s(r) / 2;
-%             s(i) = s(i) * 2;
-%         end
-%     end
+    while max(s) / min(s) > 10
+        [~,q] = max(s);
+        [~,w] = min(s);
+        
+        s(q) = s(q) / 2;
+        s(w) = s(w) * 2;
+    end
     
+   
     A = diag(s);
     
 %     for i = 2:n
@@ -20,7 +23,9 @@ function S = matrix_with_det(n,d)
 %     end
     
     Q = gallery('orthog', n);
-    P = inv(Q);
-    S = P*A*Q;
+    %P = inv(Q);
+    S = Q'*A*Q;
+    
+
 end
 

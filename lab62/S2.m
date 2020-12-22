@@ -8,5 +8,6 @@ function [S] = S2(A)
             end
         end
     end
+%     S = sqrt(S);
 end
 

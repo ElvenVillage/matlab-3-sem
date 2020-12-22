@@ -25,22 +25,13 @@ residuals1 = zeros(1, iterations1);
 for i = 1:iterations1
     [B, Q, W] = jacobi(A, epsilon(i));
     S_n_n = diag(B);
+    S_n = sort(S_n_n);
     
-    error_norms1(i) = norm(diag(sort(S_n_n)') - diag(S), Inf);
+    error_norms1(i) = norm(S_n - sort(S'), Inf);
     sweeps1(i) = W;
     residuals1(i) = norm(A*Q-Q*diag(S_n_n), Inf);
 end
 
-
-% % СДВИГ
-% mu = (S(1) + S(n-1))/2;
-% A = A - mu*eye(n);
-% sweeps10 = zeros(1, iterations1);
-% for i = 1:iterations1
-%     [~, ~, W] = jacobi(A, epsilon(i));
-%     sweeps10(i) = W;
-% 
-% end
 
 figure
 loglog(epsilon, sweeps1, '-r');
@@ -77,7 +68,7 @@ for k = 1:iterations2
     S = ones(1, n);
     x(k) = 1/(10^k);
     for i = 1:(n/2)
-        S(i) = 1 + x(k);
+        S(i) = 1 + i*x(k);
     end
    
     A = P*diag(S)*P';
@@ -93,26 +84,12 @@ for k = 1:iterations2
     
 end
 
-%Сдвиг
-% for k = 1:iterations2
-%     [B, Q, W] = jacobi(A, epsilon(8));
-%     sweeps20(k) = W;
-%     S = zeros(1, n);
-%     for i = 1:n
-%         S(i) = 1 + i/(k*10);
-%     end
-%     x(k) = 1/(k*10);
-%     A = P'*diag(S)*P;
-%     [~,~,W] = jacobi(A, eps(8));
-%     sweeps20(k) = W;
-% end
+
 
 figure
 loglog(x, sweeps2, '-b');
 grid on
-% hold on
-% loglog(x, sweeps20, '-r');
-% legend('без сдвига', 'сдвиг')
+
 title('Рис. 3 Зависимость числа итераций от величины отделимости')
 xlabel('lambda')
 ylabel('N')
